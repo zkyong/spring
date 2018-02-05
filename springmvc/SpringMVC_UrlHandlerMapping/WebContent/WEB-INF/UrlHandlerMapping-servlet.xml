@@ -1,0 +1,39 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+   http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- BeanNameUrlHandlerMapping -->
+	<bean name="/helloWorld.htm" class="com.yiibai.springmvc.HelloController" />
+	<bean name="/hello*" class="com.yiibai.springmvc.HelloController" />
+	<bean name="/welcome.htm" class="com.yiibai.springmvc.WelcomeController" />   
+
+	<!-- ControllerClassNameHandlerMapping -->
+	<!-- 
+	<bean id="helloController" class="com.yiibai.springmvc.HelloController" />
+	<bean id="welcomeController" class="com.yiibai.springmvc.WelcomeController" />
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
+	-->
+	<!-- SimpleUrlHandlerMapping -->
+	<!-- 	
+	<bean id="helloController" class="com.yiibai.springmvc.HelloController" />
+	<bean id="welcomeController" class="com.yiibai.springmvc.WelcomeController" />
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/welcome.html">welcomeController</prop>
+				<prop key="/helloWorld.html">helloController</prop>
+			</props>
+		</property>
+	</bean>
+	-->
+</beans>

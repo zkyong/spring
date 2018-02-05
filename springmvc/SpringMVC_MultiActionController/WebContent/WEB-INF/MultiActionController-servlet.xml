@@ -1,0 +1,73 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+   http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!--  
+		多动作控制器
+			MultiActionController类在单个控制器中分别映射多个URL到对应的方法
+	-->
+	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+	<bean name="/home.html" class="com.yiibai.springmvc.UserController" />
+	<bean name="/user/*.html" class="com.yiibai.springmvc.UserController" />
+	
+	<!-- 
+		实现多动作控制器的属性方法名称解析器
+			MultiActionController类可在单个控制器中分别映射多个URL到对应的方法
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"> 
+		<property name="caseSensitive" value="true" />
+	</bean>
+	<bean class="com.yiibai.springmvc.UserController">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+				<property name="mappings">
+					<props>
+						<prop key="/user/home.html">home</prop>
+						<prop key="/user/add.html">add</prop>
+						<prop key="/user/remove.html">remove</prop>
+					</props>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	-->
+	
+	<!-- 
+		实现多动作控制器的参数方法名称解析器
+			MultiActionController类可在单个控制器中分别映射多个URL到对应的方法
+	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+		<property name="caseSensitive" value="true" />
+	</bean>
+	<bean class="com.yiibai.springmvc.UserController">
+	   <property name="methodNameResolver">
+	      <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+	         <property name="paramName" value="action"/>
+	      </bean>
+	   </property>
+	</bean>
+	-->
+
+	<!-- 
+		实现多动作控制器的可参数化视图控制器
+			MultiActionController类可在单个控制器中分别映射多个URL到对应的方法
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<value>
+				index.html=userController
+			</value>
+		</property>
+	</bean>
+	<bean id="userController" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="index" />
+	</bean>
+	-->
+</beans>
